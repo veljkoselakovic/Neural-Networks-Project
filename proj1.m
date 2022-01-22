@@ -73,7 +73,7 @@ network = patternnet(LAYERS);
 
 network.performFcn = 'mse';
 network.divideFcn = '';
-%network.trainFcn = 'traingda';
+network.trainFcn = 'traingda';
 network.trainParam.epochs = EPOCHS;
 network.trainParam.goal = GOAL;
 
