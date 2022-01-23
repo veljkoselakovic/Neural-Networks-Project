@@ -4,7 +4,7 @@ clc, clear, close all
 %% Load the data
 
 load('dataset2.mat');
-rng(50);
+rng(200);
     
 input_ = pod(:, 1:2);
 output_ = pod(:, 3);
@@ -18,7 +18,6 @@ output_OHE = zeros(length(output_), 3);
 output_OHE(output_ == 1, 1 ) = 1;
 output_OHE(output_ == 2, 2 ) = 1;
 output_OHE(output_ == 3, 3 ) = 1;
-output_OHE
 
 %% Display the whole set
 
@@ -35,7 +34,7 @@ output_OHE = output_OHE';
 N = length(input_);
 
 TRAINING_COEFFICIENT = 0.85;
-
+rng(200);
 idxs = randperm(N);
 idx_train = idxs(1 : TRAINING_COEFFICIENT * N);
 idx_validation = idxs(TRAINING_COEFFICIENT * N + 1 : N);
@@ -84,8 +83,8 @@ network.trainParam.goal = GOAL;
 %% Train the network
 
 %display(network)
-rng(50);
-[training_input', training_output']
+rng(200)
+%[training_input', training_output']
 network = train(network, training_input, training_output);
 
 %% Measuring performance
