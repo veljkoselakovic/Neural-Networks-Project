@@ -63,8 +63,8 @@ legend('Training', 'Validation');
 
 %% Create the neural network
 
-LAYERS = [5, 8, 4];
-EPOCHS = 600;
+LAYERS = [5, 6, 4];
+EPOCHS = 900;
 GOAL = 10e-4;
 MIN_GRADIENT = 10e-6;
 
