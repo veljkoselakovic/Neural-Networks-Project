@@ -40,20 +40,20 @@ idx_train = idxs(1 : TRAINING_COEFFICIENT * N);
 idx_validation = idxs(TRAINING_COEFFICIENT * N + 1 : N);
 
 training_input = input_(idx_train, :);
-validation_input = input_(idx_validation, :);
+test_input = input_(idx_validation, :);
 
 training_output = output_OHE(:, idx_train);
-validation_output = output_OHE(:, idx_validation);
+test_output = output_OHE(:, idx_validation);
 
 %% Display the training vs validation subsets
 training_input = training_input';
-validation_input = validation_input';
+test_input = test_input';
 %training_output = training_output';
 %validation_output = validation_output';
 
 figure, hold all
 plot(training_input(1, :), training_input(2, :), 'ko');
-plot(validation_input(1, :), validation_input(2, :), 'rx');
+plot(test_input(1, :), test_input(2, :), 'rx');
 legend('Training', 'Test');
 
 
@@ -93,9 +93,9 @@ for i = 1 : length(LAYERS)
     display(network)
     network
 
-    prediction = network(validation_input);
+    prediction = network(test_input);
 
-    figure, plotconfusion(validation_output, prediction);
+    figure, plotconfusion(test_output, prediction);
 
     prediction = round(prediction)
 

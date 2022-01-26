@@ -81,13 +81,13 @@ final_input = [training_input, test_input];
 final_output = [training_output, test_output];
 
 %% Krosvalidacija
-arhitektura = {[10, 5], [12, 6, 3], [4]};
+arhitektura = {[10, 5], [12, 6, 3], [4,6,4], [4,2,3], [4,4,4]};
 Abest = 0;
 F1best = 0;
 
 for reg = [0.1 : 0.1 : 1]
-    for w = [1 : 1 : 15]
-        for lr = [0.05, 0.005:0.1:0.5]
+    for w = [0.5, 1, 1.4, 2 , 5, 10]
+        for lr = [0.01, 0.02, 0.03, 0.05, 0.005:0.1:0.5]
             for arh = length(arhitektura)
                 rng(200);
                 net = patternnet(arhitektura{arh});
@@ -119,10 +119,11 @@ for reg = [0.1 : 0.1 : 1]
                 A = 100*sum(trace(cm))/sum(sum(cm));
                 F1 = 2*cm(2, 2)/(cm(2, 1)+cm(1, 2)+2*cm(2, 2));
 
-                disp(['Reg = ' num2str(reg) ', ACC = ' num2str(A) ', F1 = ' num2str(F1)])
-                disp(['LR = ' num2str(lr) ', epoch = ' num2str(info.best_epoch)])
 
                 if F1 > F1best
+                    disp(['Reg = ' num2str(reg) ', ACC = ' num2str(A) ', F1 = ' num2str(F1)])
+                    disp(['LR = ' num2str(lr) ', epoch = ' num2str(info.best_epoch)])
+
                     F1best = F1;
                     Abest = A;
                     reg_best = reg;
@@ -137,24 +138,43 @@ for reg = [0.1 : 0.1 : 1]
 end
 
 %%Treniranje NM sa optimalnim parametrima (na celom trening + val skupu)
+
+rng(200);
 net = patternnet(arh_best);
 
 net.divideFcn = '';
 
 net.performParam.regularization = reg_best;
 
-net.trainFcn = 'traingd';
+net.trainFcn = 'traingda';
 
 net.trainParam.lr = lr_best;
-
 net.trainParam.epochs = ep_best;
 net.trainParam.goal = 1e-4;
+net.trainParam.max_fail = 20;
+
 
 weight = ones(1, length(final_output));
 weight(final_output == 1) = w_best;
 
 [net, info] = train(net, final_input, final_output, [], [], weight);
 
+
+
+
 %% Performanse NM
+disp("--");
+disp(['Reg = ' num2str(reg_best) ', ACC = ' num2str(Abest) ', F1 = ' num2str(F1best)])
+disp(w_best)
+disp(['LR = ' num2str(lr_best) ', epoch = ' num2str(info.best_epoch)])
+disp(arh_best)
+
 pred = sim(net, test_input);
 figure, plotconfusion(test_output, pred);
+
+
+[~, cm] = confusion(test_output, pred);
+A = 100*sum(trace(cm))/sum(sum(cm))
+F1 = 2*cm(2, 2)/(cm(2, 1)+cm(1, 2)+2*cm(2, 2))
+
+
