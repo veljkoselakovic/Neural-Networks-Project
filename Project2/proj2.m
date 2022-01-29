@@ -64,17 +64,17 @@ validationK2 = K2(:, 0.85*N2+1:N2);
 
 %%  Merged sets
 training_input = [trainingK1, trainingK2];
-training_output = [ones(1, round(0.7 * N1)), zeros(1, round(0.7*N2))];
+training_output = [zeros(1, round(0.7 * N1)), ones(1, round(0.7*N2))];
 
 idxs = randperm(length(training_input));
 training_input = training_input(:, idxs);
 training_output = training_output(idxs);
 
 test_input = [testK1, testK2];
-test_output = [ones(1, round(0.15 * N1)), zeros(1, round(0.15*N2)-1)];
+test_output = [zeros(1, round(0.15 * N1)), ones(1, round(0.15*N2)-1)];
 
 validation_input = [validationK1, validationK2];
-validation_output = [ones(1, round(0.15 * N1)), zeros(1, round(0.15*N2)-1)];
+validation_output = [zeros(1, round(0.15 * N1)), ones(1, round(0.15*N2)-1)];
 
 %% Final training sets
 final_input = [training_input, test_input];

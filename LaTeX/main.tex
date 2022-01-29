@@ -217,7 +217,7 @@
     \begin{solution}{}
     \subsection*{Traženje optimalnih hiperparametara}
     Hiperparametri su uvek specifični za skup podataka, i ne postoji univerzalan broj koji se može koristiti. Jedino što nam preostaje je da probamo što više mogućnosti i vidimo koja je najbolja. Ovo naravno može potrajati jer treniranje neuralne mreže vrlo lako postane dugotrajan proces.
-    Pošto nemamo previše vremena i želimo reproduciiblne rezultate, prolazimo kroz malu količinu različitih hiperparametara. Ukupno ćemo imati 2250 treniranja neuralne mreže.
+    Pošto nemamo previše vremena i želimo reproducibilne rezultate, prolazimo kroz malu količinu različitih hiperparametara. Ukupno ćemo imati 2250 treniranja neuralne mreže.
     Ovo su vrednosti koje smo prošli:
     \begin{itemize}
         \item Arhitekture: $[10, 5], [12, 6, 3], [4,6,4], [4,2,3], [4,4,4]$
@@ -237,8 +237,8 @@
     \subsubsection*{Trening skup}
     Za gorenavedene parametre dobijamo sledeće performanse na trening skupu:
     \begin{itemize}
-        \item \textbf{Preciznost/Accuracy} $= 84.6246\%$
-        \item \textbf{Osetljivost/Recall} $= 88.922\%$
+        \item \textbf{Preciznost/Accuracy} $= 85.1\%$
+        \item \textbf{Osetljivost/Recall} $= 91.5\%$
         \item \textbf{F1} $= 0.90739$
     \end{itemize}
     \begin{center}
@@ -251,8 +251,8 @@
 
     Za test skup dobijamo:
     \begin{itemize}
-        \item \textbf{Preciznost/Accuracy} $= 84.3862\%$
-        \item \textbf{Osetljivost/Recall} $= 88.4401114\%$
+        \item \textbf{Preciznost/Accuracy} $= 85.8\%$
+        \item \textbf{Osetljivost/Recall} $= 92.2\%$
         \item \textbf{F1} $= 0.9065$
     \end{itemize}
     \begin{center}
@@ -269,7 +269,7 @@
     
     \end{solution}\newpage
     \begin{eComment}{}
-    U ovom projektu smo tražili idealne vrednosti za hiperparametre, radeći na skupu podataka iz realnog života. Dobijeni rezultati su u velikoj meri očekivani, osim možda težina, za koje se ispostavilo da je najbolje ostaviti na 1. Sama tačnost naše neuralne mreže je poprilično dobra sa svojih $\sim$  84\%. Takođe, \inlinecode{performance hit} na test skupu je bio minimalan, sa svojom redukcijom od $\sim$0.3\%. \\
+    U ovom projektu smo tražili idealne vrednosti za hiperparametre, radeći na skupu podataka iz realnog života. Dobijeni rezultati su u velikoj meri očekivani, osim možda težina, za koje se ispostavilo da je najbolje ostaviti na 1. Sama tačnost naše neuralne mreže je poprilično dobra sa svojih $\sim$  85\%. Takođe, \inlinecode{performance hit} je bio negativan, performans je bio bolji na test setu.
     Sve u svemu, ova neuralna mreža može biti dobra strategija za neku veliku firmu, sa ogromnim brojem kandidata koji se intervjuišu i treniraju. Uz još veći \inlinecode{dataset} i, naravno, veću komputacionu moć, ova mreža se može značajno unaprediti.
     \end{eComment}
     
